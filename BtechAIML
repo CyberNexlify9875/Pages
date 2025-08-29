@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlocking the Future: Artificial Intelligence and Machine Learning</title>
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #0A0E2B 0%, #1A3C6A 100%);
+            color: #E8F1FF;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 1080px;
+            height: 720px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 0 60px rgba(0, 183, 214, 0.8);
+            background: rgba(10, 14, 43, 0.95);
+        }
+        .particle-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="10" cy="10" r="2" fill="%2300B7D6" opacity="0.3"/%3E%3Ccircle cx="90" cy="90" r="2" fill="%23FF4A8C" opacity="0.3"/%3E%3Ccircle cx="50" cy="50" r="2" fill="%233DDC97" opacity="0.3"/%3E%3C/svg%3E') repeat;
+            animation: particleMove 20s linear infinite;
+        }
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            background: linear-gradient(145deg, rgba(10, 14, 43, 0.9), rgba(20, 30, 80, 0.9));
+            border: 3px solid #00B7D6;
+            border-radius: 15px;
+            box-shadow: inset 0 0 30px rgba(0, 183, 214, 0.4);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .slide.exit {
+            opacity: 0;
+            transform: scale(1.2);
+        }
+        h1, h2 {
+            color: #00B7D6;
+            margin-bottom: 20px;
+            font-size: 2.8em;
+            line-height: 1.1;
+            font-weight: 700;
+            text-shadow: 0 0 15px #00B7D6, 0 0 25px #00B7D6;
+            animation: neonGlow 1.5s ease-in-out infinite alternate;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            animation: fadeIn 1.2s ease-in;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            margin: 15px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.2em;
+            animation: slideIn 0.7s ease-in;
+        }
+        li:before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: #FF4A8C;
+            font-size: 1.2em;
+        }
+        li:hover {
+            color: #B0E0F6;
+            transform: translateX(8px);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .highlight {
+            color: #5A3FCE;
+            font-weight: bold;
+            text-shadow: 0 0 10px #5A3FCE;
+        }
+        .benefit {
+            color: #3DDC97;
+            text-shadow: 0 0 10px #3DDC97;
+        }
+        .sales-focus {
+            font-style: italic;
+            color: #FFD60A;
+            font-weight: 600;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .clickable {
+            color: #B0E0F6;
+            text-decoration: underline wavy;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .clickable:hover {
+            color: #FF4A8C;
+            text-shadow: 0 0 10px #FF4A8C;
+        }
+        .nav-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 25px;
+            z-index: 1000;
+        }
+        .nav-button {
+            background: linear-gradient(45deg, #5A3FCE, #FF4A8C);
+            color: #E8F1FF;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 0 20px rgba(255, 74, 140, 0.7);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .nav-button:hover {
+            box-shadow: 0 0 30px rgba(255, 74, 140, 1);
+            transform: scale(1.1);
+        }
+        .nav-button:disabled {
+            background: #333;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+        .svg-placeholder {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+            display: block;
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes neonGlow {
+            from { text-shadow: 0 0 10px #00B7D6, 0 0 20px #00B7D6; }
+            to { text-shadow: 0 0 20px #00B7D6, 0 0 40px #00B7D6; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes particleMove {
+            from { background-position: 0 0; }
+            to { background-position: 100px 100px; }
+        }
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%;
+                height: 80vh;
+            }
+            .slide {
+                padding: 20px;
+            }
+            h1, h2 {
+                font-size: 2em;
+            }
+            p, li {
+                font-size: 1em;
+            }
+            .svg-placeholder {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="particle-bg"></div>
+    <div class="container">
+        <!-- Slide 1: Title Slide -->
+        <section class="slide" data-slide="1">
+            <h1>Unlocking the Future: Artificial Intelligence and Machine Learning</h1>
+            <h2>B.Tech AIML: Pioneering a New Era</h2>
+            <p class="sales-focus">Embark on a Cosmic Journey to Shape Tomorrow!</p>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <circle cx="50" cy="50" r="45" stroke-dasharray="15,5" />
+                <path d="M50 20 L80 80 L20 80 Z" fill="#5A3FCE" fill-opacity="0.4" />
+            </svg>
+            <!-- Placeholder: Futuristic AI brain or holographic globe -->
+        </section>
+
+        <!-- Slide 2: Introduction to AIML -->
+        <section class="slide" data-slide="2">
+            <h2>What is AIML?</h2>
+            <p>Artificial Intelligence and Machine Learning (AIML) empower systems to emulate human cognition, processing 2.5 quintillion bytes of data daily. In 2024, 80% of global organizations adopted AI, contributing $15.7 trillion to the economy by 2030.</p>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <rect x="15" y="15" width="70" height="70" rx="10" fill="#3DDC97" fill-opacity="0.3" />
+                <circle cx="50" cy="50" r="25" stroke="#5A3FCE" />
+            </svg>
+            <!-- Placeholder: Diagram of AI, ML, and Deep Learning intersection -->
+        </section>
+
+        <!-- Slide 3: Real-Life Applications -->
+        <section class="slide" data-slide="3">
+            <h2>AIML in Everyday Life</h2>
+            <ul>
+                <li><span class="highlight">Virtual Assistants:</span> Siri, Alexa, and GenAI chatbots handle 3 billion queries daily with 92% NLP accuracy.</li>
+                <li><span class="highlight">Autonomous Vehicles:</span> 97% accurate image recognition powers 1.2 million self-driving cars by 2026.</li>
+                <li><span class="highlight">Industry:</span> Predictive maintenance saves $1.3 trillion, cutting downtime by 32%.</li>
+                <li><span class="highlight">E-commerce:</span> GenAI recommendations drive 25% of global online sales.</li>
+                <li><span class="highlight">Healthcare:</span> AI cuts drug discovery time by 45%, saving $120 billion.</li>
+                <li><span class="highlight">Education:</span> Adaptive platforms boost outcomes by 20% for 250 million users.</li>
+                <li><span class="highlight">Conservation:</span> AI aids 18% of global biodiversity efforts via wildlife tracking.</li>
+                <li><span class="highlight">Gaming:</span> AI enhances NPC behavior in 80% of AAA games.</li>
+            </ul>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <path d="M20 80 Q50 50 80 80" stroke="#FFD60A" />
+                <circle cx="50" cy="50" r="15" fill="#5A3FCE" fill-opacity="0.4" />
+            </svg>
+            <!-- Placeholder: Icons for chatbots, cars, factories, games -->
+        </section>
+
+        <!-- Slide 4: Industry Transformations -->
+        <section class="slide" data-slide="4">
+            <h2>AIML Transforming Industries</h2>
+            <ul>
+                <li><span class="highlight">Healthcare:</span> 94% accurate AI diagnostics; personalized medicine market to hit $3.7 trillion by 2027.</li>
+                <li><span class="highlight">Finance:</span> Fraud detection saves $5.5 billion; ML boosts credit scoring by 30%.</li>
+                <li><span class="highlight">Automotive:</span> Autonomous vehicles reduce accidents by 35%; maintenance saves $18 billion.</li>
+                <li><span class="highlight">Retail:</span> AI marketing increases conversions by 32%; inventory cuts costs by 25%.</li>
+                <li><span class="highlight">Sustainability:</span> AI reduces emissions by 28%, saving 1.8 gigatons of CO2.</li>
+                <li><span class="highlight">Agriculture:</span> Precision farming boosts yields by 20%, feeding 600 million more people.</li>
+                <li><span class="highlight">Logistics:</span> AI optimizes supply chains, saving $1 trillion annually.</li>
+            </ul>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <rect x="10" y="10" width="80" height="80" rx="5" fill="#3DDC97" fill-opacity="0.3" />
+                <path d="M30 70 L50 50 L70 70" stroke="#5A3FCE" />
+            </svg>
+            <!-- Placeholder: Industry logos (hospital, bank, car, farm) -->
+        </section>
+
+        <!-- Slide 5: Technical Foundations -->
+        <section class="slide" data-slide="5">
+            <h2>AIML Technical Core</h2>
+            <ul>
+                <li><span class="highlight">Math Foundations:</span> Linear algebra, calculus, probability power 95% of AI algorithms.</li>
+                <li><span class="highlight">ML Algorithms:</span> Supervised (SVMs, Random Forests), unsupervised (K-means, DBSCAN), reinforcement (DQN).</li>
+                <li><span class="highlight">Deep Learning:</span> CNNs achieve 99% image accuracy; RNNs/LSTMs for NLP; GANs generate 12M synthetic datasets.</li>
+                <li><span class="highlight">Tools:</span> TensorFlow (50% market share), PyTorch, Keras, Scikit-learn, Hugging Face.</li>
+                <li><span class="highlight">Data Pipeline:</span> Preprocessing, feature engineering, metrics (F1-score, ROC-AUC).</li>
+                <li><span class="highlight">Advanced Areas:</span> NLP (95% of chatbots), Computer Vision, Edge AI for 6G/IoT.</li>
+            </ul>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <path d="M20 20 L80 80 M80 20 L20 80" stroke="#FFD60A" />
+                <circle cx="50" cy="50" r="20" fill="#5A3FCE" fill-opacity="0.4" />
+            </svg>
+            <!-- Placeholder: Diagrams or logos for TensorFlow, neural networks -->
+        </section>
+
+        <!-- Slide 6: Career Opportunities -->
+        <section class="slide" data-slide="6">
+            <h2>Career Pathways in AIML</h2>
+            <ul>
+                <li><span class="highlight">Roles:</span> AI Engineer, Data Scientist, ML Researcher, AI Ethicist, Robotics Engineer, NLP Specialist.</li>
+                <li><span class="highlight">Demand:</span> 100 million global AI jobs by 2025; India to add 2 million by 2027.</li>
+                <li><span class="highlight">Salaries:</span> India: ₹15-25 LPA starting; Abroad: $120,000-$170,000 entry-level.</li>
+                <li><span class="highlight">Employers:</span> Google, Microsoft, Amazon, Byju’s, DeepMind, 4,000+ AI startups.</li>
+                <li><span class="highlight">Growth:</span> AI roles grow 45% annually, 3x faster than other tech fields.</li>
+            </ul>
+            <p class="sales-focus">Launch a Stellar Career in AIML!</p>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <rect x="15" y="15" width="70" height="70" rx="5" fill="#3DDC97" fill-opacity="0.3" />
+                <path d="M50 20 V80" stroke="#5A3FCE" />
+            </svg>
+            <!-- Placeholder: Career images (professionals, tech logos) -->
+        </section>
+
+        <!-- Slide 7: Ethical Considerations -->
+        <section class="slide" data-slide="7">
+            <h2>Ethics in AIML</h2>
+            <ul>
+                <li><span class="highlight">Bias Mitigation:</span> Fair algorithms reduce discrimination by 30% in hiring models.</li>
+                <li><span class="highlight">Transparency:</span> Explainable AI adopted by 70% of enterprises by 2025.</li>
+                <li><span class="highlight">Privacy:</span> GDPR-compliant AI protects 2 billion users’ data in 2024.</li>
+                <li><span class="highlight">Social Impact:</span> 80% of consumers demand ethical AI practices.</li>
+                <li><span class="highlight">Regulation:</span> AI ethics frameworks to cover 90% of markets by 2027.</li>
+            </ul>
+            <p class="sales-focus">Build Ethical AI for a Trusted Tomorrow!</p>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <path d="M20 50 H80 M50 20 V80" stroke="#FFD60A" />
+                <circle cx="50" cy="50" r="15" fill="#5A3FCE" fill-opacity="0.4" />
+            </svg>
+            <!-- Placeholder: Ethics imagery (scales of justice, privacy icons) -->
+        </section>
+
+        <!-- Slide 8: Learning Pathways -->
+        <section class="slide" data-slide="8">
+            <h2>Mastering AIML</h2>
+            <ul>
+                <li><span class="highlight">B.Tech AIML:</span> 4-year program with 70% practical projects, covering Python, ML, ethics.</li>
+                <li><span class="highlight">Skills:</span> Python (90% of AI jobs), data analysis, cloud platforms (AWS, Azure, GCP).</li>
+                <li><span class="highlight">Resources:</span> Coursera, edX, Kaggle; 15 million learners enrolled in 2024.</li>
+                <li><span class="highlight">Certifications:</span> AWS AI, Google TensorFlow, Stanford AI, NVIDIA Deep Learning, Meta AI.</li>
+                <li><span class="highlight">Communities:</span> 600K+ developers in GitHub AI projects, 100K+ in AI hackathons.</li>
+            </ul>
+            <p class="sales-focus">Ignite Your AIML Journey!</p>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <rect x="20" y="20" width="60" height="60" rx="10" fill="#3DDC97" fill-opacity="0.3" />
+                <path d="M30 70 L50 50 L70 70" stroke="#5A3FCE" />
+            </svg>
+            <!-- Placeholder: Education images (classroom, laptop, coding) -->
+        </section>
+
+        <!-- Slide 9: AI in Entertainment -->
+        <section class="slide" data-slide="9">
+            <h2>AI in Entertainment</h2>
+            <ul>
+                <li><span class="highlight">Gaming:</span> AI powers NPC behavior in 85% of AAA games, enhancing realism.</li>
+                <li><span class="highlight">Film:</span> AI-generated VFX used in 60% of 2024 blockbusters, saving $500M.</li>
+                <li><span class="highlight">Music:</span> AI composes 10% of streaming platform tracks, used by 100M listeners.</li>
+                <li><span class="highlight">AR/VR:</span> AI-driven immersive experiences reach 50M users globally.</li>
+            </ul>
+            <p class="sales-focus">Revolutionize Entertainment with AI!</p>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <path d="M20 80 Q50 50 80 80" stroke="#FFD60A" />
+                <rect x="30" y="30" width="40" height="40" fill="#5A3FCE" fill-opacity="0.4" />
+            </svg>
+            <!-- Placeholder: Entertainment imagery (game controller, film reel, VR headset) -->
+        </section>
+
+        <!-- Slide 10: Emerging Trends -->
+        <section class="slide" data-slide="10">
+            <h2>Emerging Trends in AIML</h2>
+            <ul>
+                <li><span class="highlight">Multimodal AI:</span> Integrates text, images, video for 90% richer applications.</li>
+                <li><span class="highlight">AI Agents:</span> Autonomous systems handle 20% of enterprise tasks by 2026.</li>
+                <li><span class="highlight">Quantum AI:</span> 10x faster processing expected by 2030.</li>
+                <li><span class="highlight">Generative AI:</span> $36 billion market in 2025, up 20% from 2024.</li>
+            </ul>
+            <p class="sales-focus">Stay Ahead with Cutting-Edge AI Trends!</p>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <circle cx="50" cy="50" r="40" stroke-dasharray="10,5" />
+                <path d="M20 80 Q50 50 80 80" stroke="#FFD60A" />
+            </svg>
+            <!-- Placeholder: Futuristic trend imagery (quantum circuits, AI agents) -->
+        </section>
+
+        <!-- Slide 11: Global Impact -->
+        <section class="slide" data-slide="11">
+            <h2>Global Impact of AIML</h2>
+            <p>AI drives $15.7 trillion in economic growth by 2030, with 2.5 billion users in 2025 and a 28% CAGR in the US AI market ($80 billion).</p>
+            <ul>
+                <li><span class="highlight">Economic Growth:</span> AI boosts GDP by 18% in developed nations.</li>
+                <li><span class="highlight">Innovation:</span> 1.8 million AI patents filed by 2025.</li>
+                <li><span class="highlight">Accessibility:</span> AI education reaches 300 million students.</li>
+                <li><span class="highlight">Sustainability:</span> AI cuts carbon emissions by 15% by 2030.</li>
+            </ul>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <circle cx="50" cy="50" r="40" stroke-dasharray="10,5" />
+                <path d="M50 20 L80 80 L20 80 Z" fill="#5A3FCE" fill-opacity="0.4" />
+            </svg>
+            <!-- Placeholder: Global map or impact imagery -->
+        </section>
+
+        <!-- Slide 12: Challenges in AIML -->
+        <section class="slide" data-slide="12">
+            <h2>Challenges in AIML</h2>
+            <ul>
+                <li><span class="highlight">Data Quality:</span> 85% of AI projects fail due to poor data quality.</li>
+                <li><span class="highlight">Compute Power:</span> Large model training costs $3-15 million in 2025.</li>
+                <li><span class="highlight">Skill Gap:</span> 60% of organizations face AI talent shortages.</li>
+                <li><span class="highlight">Ethics:</span> Bias in 40% of AI models risks unfair outcomes.</li>
+                <li><span class="highlight">Regulation:</span> 45% of countries lack AI governance frameworks.</li>
+            </ul>
+            <p class="sales-focus">Overcome Challenges with Expertise!</p>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <path d="M20 20 L80 80 M80 20 L20 80" stroke="#FFD60A" />
+                <rect x="30" y="30" width="40" height="40" fill="#5A3FCE" fill-opacity="0.4" />
+            </svg>
+            <!-- Placeholder: Challenge imagery (hurdles, data icons) -->
+        </section>
+
+        <!-- Slide 13: Practical Projects -->
+        <section class="slide" data-slide="13">
+            <h2>Hands-On AIML Projects</h2>
+            <ul>
+                <li><span class="highlight">Chatbots:</span> NLP-based assistants handle 1.5M daily queries with 90% accuracy.</li>
+                <li><span class="highlight">Image Recognition:</span> 97% accurate medical imaging models for diagnostics.</li>
+                <li><span class="highlight">Recommendation Systems:</span> Netflix-style algorithms with 88% user satisfaction.</li>
+                <li><span class="highlight">Predictive Analytics:</span> 92% accurate retail trend forecasts.</li>
+                <li><span class="highlight">IoT Integration:</span> Edge AI powers 60M smart devices in 2025.</li>
+            </ul>
+            <p class="sales-focus">Build Real-World AI Solutions!</p>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <rect x="15" y="15" width="70" height="70" rx="5" fill="#3DDC97" fill-opacity="0.3" />
+                <circle cx="50" cy="50" r="15" fill="#5A3FCE" fill-opacity="0.4" />
+            </svg>
+            <!-- Placeholder: Project imagery (code, app mockups) -->
+        </section>
+
+        <!-- Slide 14: Student Opportunities -->
+        <section class="slide" data-slide="14">
+            <h2>Student Opportunities in AIML</h2>
+            <ul>
+                <li><span class="highlight">Internships:</span> 500K+ AI internships globally, with 50K in India.</li>
+                <li><span class="highlight">Hackathons:</span> 200K students compete in AI challenges yearly.</li>
+                <li><span class="highlight">Research:</span> 10K+ undergrads contribute to AI papers annually.</li>
+                <li><span class="highlight">Startups:</span> 5K student-led AI startups launched in 2024.</li>
+            </ul>
+            <p class="sales-focus">Kickstart Your AI Career as a Student!</p>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <path d="M20 80 Q50 50 80 80" stroke="#FFD60A" />
+                <rect x="30" y="30" width="40" height="40" fill="#5A3FCE" fill-opacity="0.4" />
+            </svg>
+            <!-- Placeholder: Student imagery (hackathon, research lab) -->
+        </section>
+
+        <!-- Slide 15: Conclusion -->
+        <section class="slide" data-slide="15">
+            <h2>Conclusion</h2>
+            <p>AIML is revolutionizing the world, with a $15.7 trillion economic impact by 2030 and 2.5 billion users in 2025. As B.Tech students, harness AI to innovate, solve global challenges, and build a sustainable future!</p>
+            <p class="sales-focus">Join the AI Revolution Today!</p>
+            <svg class="svg-placeholder" viewBox="0 0 100 100" fill="none" stroke="#00B7D6" stroke-width="2">
+                <circle cx="50" cy="50" r="45" stroke-dasharray="15,5" />
+                <path d="M50 20 L80 80 L20 80 Z" fill="#5A3FCE" fill-opacity="0.4" />
+            </svg>
+            <!-- Placeholder: Motivational or call-to-action imagery -->
+        </section>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="nav-button" id="prevBtn" disabled>Previous</button>
+        <button class="nav-button" id="nextBtn">Next</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'exit');
+                if (i === index) {
+                    slide.classList.add('active');
+                } else if (i === index - 1) {
+                    slide.classList.add('exit');
+                }
+            });
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === slides.length - 1;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            } else if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        document.querySelectorAll('.clickable').forEach(item => {
+            item.addEventListener('click', () => {
+                alert('Explore more about this topic on our AI resources page!');
+            });
+        });
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
